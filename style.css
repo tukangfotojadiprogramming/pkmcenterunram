@@ -103,7 +103,7 @@ a { color: inherit; text-decoration: none; }
 .section-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--yellow); color: var(--navy); font-size: 28px; font-weight: 800; }
 .vision-card h3, .mission-block h3 { margin-bottom: 8px; color: var(--navy); font-size: 22px; }
 .vision-card p { max-width: 900px; color: #294969; font-size: 15px; }
-.mission-block { margin-top: 30px; }
+.mission-block { margin-top: 30px; padding-inline: 27px; }
 .mission-list { list-style: none; display: grid; gap: 13px; }
 .mission-list li { display: grid; grid-template-columns: 30px 1fr; align-items: start; gap: 12px; }
 .mission-list li span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--yellow); color: var(--navy); font-size: 12px; font-weight: 800; }
@@ -221,6 +221,7 @@ a { color: inherit; text-decoration: none; }
   .vision-card, .mission-block { grid-template-columns: 44px 1fr; gap: 13px; }
   .section-icon { width: 40px; height: 40px; font-size: 23px; }
   .vision-card { padding: 19px; }
+  .mission-block { padding-inline: 19px; }
   .vision-card h3, .mission-block h3 { font-size: 20px; }
   .org-chart { padding: 18px 12px; }
   .org-level { gap: 8px; }
@@ -281,4 +282,181 @@ a { color: inherit; text-decoration: none; }
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+
+/* ==========================
+   POPUP AJAKAN FESTA PKM 2026
+   ========================== */
+.festa-popup {
+  position: fixed;
+  z-index: 999;
+  right: clamp(16px, 2.2vw, 34px);
+  bottom: 22px;
+  width: min(290px, calc(100vw - 32px));
+  padding: 18px 18px 14px;
+  overflow: visible;
+  color: #fff;
+  background: linear-gradient(145deg, #0864ad 0%, #064987 75%, #073a72 100%);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(5, 45, 89, .32);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(18px) scale(.97);
+  transition: opacity .35s ease, transform .35s ease, visibility .35s ease;
+}
+.festa-popup.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.festa-popup::before,
+.festa-popup::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.festa-popup::before {
+  width: 78px;
+  height: 78px;
+  right: -15px;
+  bottom: -18px;
+  border-radius: 70% 0 20px 0;
+  background: #ffc928;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 35% 65%);
+}
+.festa-popup::after {
+  width: 70px;
+  height: 70px;
+  left: -15px;
+  bottom: -15px;
+  border-radius: 0 80% 0 20px;
+  background: #ffc928;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+.festa-popup > * { position: relative; z-index: 1; }
+.festa-popup-close {
+  position: absolute !important;
+  z-index: 3 !important;
+  top: -12px;
+  right: -12px;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  padding: 0;
+  color: #0a3158;
+  background: #fff;
+  border: 2px solid #e7f0fa;
+  border-radius: 50%;
+  font: 700 21px/1 Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,.14);
+}
+.festa-popup-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  margin-bottom: 8px;
+}
+.festa-sticker {
+  display: inline-block;
+  padding: 5px 13px;
+  color: #073c70;
+  background: #ffca16;
+  border-radius: 10px 10px 10px 3px;
+  font-size: 19px;
+  font-weight: 800;
+  font-style: italic;
+  transform: rotate(-5deg);
+}
+.festa-megaphone { font-size: 34px; line-height: 1; filter: drop-shadow(0 4px 4px rgba(0,0,0,.16)); }
+.festa-popup-kicker { margin: 0 0 2px; color: #eaf5ff; font-size: 12px; font-weight: 700; }
+.festa-popup h2 { margin: 0 0 8px; color: #fff; font-size: clamp(21px, 2.4vw, 24px); line-height: 1.12; letter-spacing: -.7px; }
+.festa-popup h2 span { color: #ffca16; }
+.festa-popup-copy { max-width: 240px; margin: 0 0 12px; color: #f0f7ff; font-size: 12px; line-height: 1.45; }
+.festa-popup-info {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 10px;
+  padding: 9px 10px;
+  color: #0a3158;
+  background: #f2f8ff;
+  border-radius: 13px;
+}
+.festa-calendar { display: grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; color: #0874c9; background: #dceeff; border-radius: 10px; font-size: 22px; font-weight: 800; }
+.festa-popup-info strong, .festa-popup-info small { display: block; }
+.festa-popup-info strong { font-size: 11px; line-height: 1.4; }
+.festa-popup-info small { margin-top: 2px; color: #4b6480; font-size: 10px; line-height: 1.4; }
+.festa-popup-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  padding: 10px 12px;
+  color: #073c70;
+  background: #ffca16;
+  border: 2px solid #ffca16;
+  border-radius: 999px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+.festa-popup-cta:hover { color: #073c70; background: #ffdc56; transform: translateY(-2px); }
+.festa-popup-cta span { font-size: 18px; line-height: 16px; }
+.festa-popup-note { margin: 9px 0 0; color: #d4e8fa; font-size: 10px; text-align: center; }
+@media (max-width: 480px) {
+  .festa-popup { right: 12px; bottom: 12px; width: min(270px, calc(100vw - 24px)); padding: 17px 16px 12px; border-radius: 18px; }
+  .festa-popup h2 { font-size: 22px; }
+  .festa-popup-copy { font-size: 11px; }
+  .festa-sticker { font-size: 17px; }
+  .festa-megaphone { font-size: 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .festa-popup { transition: none; }
+}
+
+
+/* Ikon mini FESTA PKM: tetap terlihat setelah popup diminimalkan */
+.festa-launcher {
+  position: fixed;
+  z-index: 998;
+  right: 22px;
+  bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 54px;
+  height: 54px;
+  padding: 0 15px;
+  color: #073c70;
+  background: linear-gradient(145deg, #ffda43, #ffbf00);
+  border: 3px solid #fff;
+  border-radius: 999px;
+  box-shadow: 0 5px 18px rgba(5, 45, 89, .25);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.75);
+  transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+}
+.festa-launcher.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+}
+.festa-launcher > span:first-child { font-size: 24px; line-height: 1; }
+.festa-launcher-label { font-size: 11px; font-weight: 900; white-space: nowrap; }
+.festa-launcher:hover { transform: scale(1.06); }
+@media (max-width: 480px) {
+  .festa-launcher { right: 14px; bottom: 14px; min-width: 48px; height: 48px; padding: 0 12px; }
+  .festa-launcher > span:first-child { font-size: 22px; }
 }

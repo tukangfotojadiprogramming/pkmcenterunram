@@ -280,6 +280,33 @@
     </div>
     <div class="copyright">© <span id="year">2026</span> BSO PKM Center Universitas Mataram. Seluruh hak cipta dilindungi.</div>
   </footer>
+
+  <!-- Popup ajakan pendaftaran FESTA PKM -->
+  <aside class="festa-popup" id="festaPopup" aria-label="Informasi pendaftaran FESTA PKM 2026" aria-hidden="true">
+    <button class="festa-popup-close" id="closeFestaPopup" type="button" aria-label="Tutup popup">×</button>
+    <div class="festa-popup-top">
+      <span class="festa-sticker">Yuk!</span>
+      <span class="festa-megaphone" aria-hidden="true">📣</span>
+    </div>
+    <p class="festa-popup-kicker">Saatnya tunjukkan idemu!</p>
+    <h2>FESTA PKM <span>2026</span></h2>
+    <p class="festa-popup-copy">Wujudkan gagasan kreatifmu menjadi karya nyata dan mulai langkahmu menuju PIMNAS.</p>
+    <div class="festa-popup-info">
+      <span class="festa-calendar" aria-hidden="true">▦</span>
+      <span><strong>Pendaftaran Proposal</strong><small>Cek informasi dan jadwal terbaru</small></span>
+    </div>
+    <a class="festa-popup-cta" href="https://lynk.id/pkmcenterunram" target="_blank" rel="noopener noreferrer">
+      Info &amp; Pendaftaran <span aria-hidden="true">→</span>
+    </a>
+    <p class="festa-popup-note">Diselenggarakan oleh PKM Center UNRAM</p>
+  </aside>
+
+  <!-- Ikon mini FESTA PKM yang tetap tersedia setelah popup ditutup -->
+  <button class="festa-launcher" id="festaLauncher" type="button" aria-label="Buka informasi FESTA PKM 2026" title="FESTA PKM 2026" aria-hidden="true">
+    <span aria-hidden="true">🎉</span>
+    <span class="festa-launcher-label">FESTA PKM</span>
+  </button>
+
   <script>
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('.main-nav');
@@ -292,6 +319,33 @@
       toggle.setAttribute('aria-expanded', 'false');
     }));
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Popup dapat diperkecil menjadi ikon mini dan dibuka kembali kapan saja.
+    const festaPopup = document.getElementById('festaPopup');
+    const closeFestaPopup = document.getElementById('closeFestaPopup');
+    const festaLauncher = document.getElementById('festaLauncher');
+    const showFestaPopup = () => {
+      festaPopup?.classList.add('is-visible');
+      festaPopup?.setAttribute('aria-hidden', 'false');
+      festaLauncher?.classList.remove('is-visible');
+      festaLauncher?.setAttribute('aria-hidden', 'true');
+    };
+    const minimizeFestaPopup = () => {
+      festaPopup?.classList.remove('is-visible');
+      festaPopup?.setAttribute('aria-hidden', 'true');
+      festaLauncher?.classList.add('is-visible');
+      festaLauncher?.setAttribute('aria-hidden', 'false');
+      sessionStorage.setItem('festaPopupDismissed', '1');
+    };
+    if (festaPopup && sessionStorage.getItem('festaPopupDismissed')) {
+      festaLauncher?.classList.add('is-visible');
+      festaLauncher?.setAttribute('aria-hidden', 'false');
+    } else if (festaPopup) {
+      window.setTimeout(showFestaPopup, 1400);
+    }
+    closeFestaPopup?.addEventListener('click', minimizeFestaPopup);
+    festaLauncher?.addEventListener('click', showFestaPopup);
+
   </script>
 </body>
 </html>
